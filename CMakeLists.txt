@@ -293,3 +293,5 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 	# Silence appfat.cpp warnings
   set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wno-narrowing")
 endif()
+
+add_subdirectory(SVViewer)
