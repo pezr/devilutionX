@@ -1,6 +1,8 @@
 find_package(SDL2_image REQUIRED)
 
-add_executable(svviewer
+configure_file("Anonymous\ Pro.ttf" "../Anonymous\ Pro.ttf" COPYONLY)
+
+add_executable(cheditor
     ../SourceX/dx.cpp
     ../SourceX/miniwin/misc.cpp
     ../SourceX/miniwin/misc_io.cpp
@@ -31,10 +33,10 @@ add_executable(svviewer
     ../SourceX/DiabloUI/selgame.cpp
     ../SourceX/DiabloUI/selhero.cpp
     ../SourceX/DiabloUI/title.cpp
-    svviewer.cpp
+    cheditor.cpp
     )
 
-target_include_directories(svviewer PRIVATE
+target_include_directories(cheditor PRIVATE
   ../Source
   ../SourceX
   ../SourceS
@@ -44,7 +46,7 @@ target_include_directories(svviewer PRIVATE
   ../3rdParty/libsmacker
   )
 
-target_link_libraries(svviewer PRIVATE
+target_link_libraries(cheditor PRIVATE
   devilution
   PKWare
   StormLib
@@ -58,15 +60,15 @@ target_link_libraries(svviewer PRIVATE
   ncurses
   )
 
-target_compile_definitions(svviewer PRIVATE ASIO_STANDALONE)
+target_compile_definitions(cheditor PRIVATE ASIO_STANDALONE)
 
 # if(NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-  # target_compile_options(svviewer PRIVATE -Wall -Wextra -Wno-write-strings -Wno-multichar -Wno-unused-parameter)
-  # target_compile_options(svviewer PRIVATE -fsigned-char)
+  # target_compile_options(cheditor PRIVATE -Wall -Wextra -Wno-write-strings -Wno-multichar -Wno-unused-parameter)
+  # target_compile_options(cheditor PRIVATE -fsigned-char)
 # endif()
 
 # if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  # target_compile_options(svviewer PRIVATE -Wno-parentheses -Wno-logical-op-parentheses -Wno-bitwise-op-parentheses)
-  # target_compile_options(svviewer PRIVATE -Wno-ignored-attributes)
+  # target_compile_options(cheditor PRIVATE -Wno-parentheses -Wno-logical-op-parentheses -Wno-bitwise-op-parentheses)
+  # target_compile_options(cheditor PRIVATE -Wno-ignored-attributes)
 # endif()
 

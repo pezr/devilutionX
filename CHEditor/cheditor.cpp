@@ -24,7 +24,7 @@ const char* fontPath = "Anonymous Pro.ttf";
 void SVV_PlrStringXY(int x, int y, int width, const std::string& str, char color);
 std::string i2s(int a);
 
-int const TTEXTS = 42;
+const int TTEXTS = 42;
 SDL_Texture* textures[TTEXTS];
 SDL_Rect rects[TTEXTS];
 int ctext = 0;
