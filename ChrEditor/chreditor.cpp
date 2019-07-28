@@ -305,41 +305,53 @@ void svviewer()
     TxtDrawChr();
 
     char col = COL_WHITE;
-    // ItemStruct item;
-    // std::string istr = "";
-    // int ii;
-    // for (int i = 0; i < NUM_INVLOC; i++) {
-        // item = plr[myplr].InvBody[i];
-        // if (item._itype != ITYPE_GOLD) {
-            // if (item._iIdentified)
-                // istr = item._iIName;
-            // else
-                // istr = item._iName;
+    ItemStruct item;
+    std::string istr = "";
+    int ii;
 
-            // if (item._iMagical == ITEM_QUALITY_MAGIC)
-                // col = COL_BLUE;
-            // if (item._iMagical == ITEM_QUALITY_UNIQUE)
-                // col = COL_GOLD;
-            // std::cout << istr << std::endl;
-        // }
-    // }
-    // for (int i = 0; i < NUM_INV_GRID_ELEM; i++) {
-        // if (plr[myplr].InvGrid[i] > 0) {
-            // ii = plr[myplr].InvGrid[j] - 1;
-            // GetItemStr(plr[myplr].InvGrid[i] - 1 + INVITEM_INV_FIRST);
-            // col = infoclr;
-            // std::cout << infostr << std::endl;
+    std::cout << "------ Wearing ------" << std::endl;
+    for (int i = 0; i < NUM_INVLOC; i++) {
+        item = plr[myplr].InvBody[i];
+        if (item._itype != ITYPE_GOLD && item._itype != ITYPE_NONE) {
+            if (item._iIdentified)
+                istr = item._iIName;
+            else
+                istr = item._iName;
 
-        // }
-    // }
-
-    for (int i = 0; i < MAXITEMS; i++) {
-        if (item[i]._itype != -1) {
-            GetItemStr(i);
-            col = infoclr;
-            std::cout << infostr << std::endl;
+            if (item._iMagical == ITEM_QUALITY_MAGIC)
+                col = COL_BLUE;
+            if (item._iMagical == ITEM_QUALITY_UNIQUE)
+                col = COL_GOLD;
+            std::cout << istr << std::endl;
         }
     }
+    std::cout << "------ Carrying ------" << std::endl;
+    for (int i = 0; i < NUM_INV_GRID_ELEM; i++) {
+        ii = plr[myplr].InvGrid[i] - 1;
+        if (ii >= 0) {
+            item = plr[myplr].InvList[ii];
+            if (item._itype != ITYPE_GOLD && item._itype != ITYPE_NONE) {
+                if (item._iIdentified)
+                    istr = item._iIName;
+                else
+                    istr = item._iName;
+
+                if (item._iMagical == ITEM_QUALITY_MAGIC)
+                    col = COL_BLUE;
+                if (item._iMagical == ITEM_QUALITY_UNIQUE)
+                    col = COL_GOLD;
+                std::cout << istr << std::endl;
+            }
+        }
+    }
+
+    // for (int i = 0; i < MAXITEMS; i++) {
+        // if (item[i]._itype != -1) {
+            // GetItemStr(i);
+            // col = infoclr;
+            // std::cout << infostr << std::endl;
+        // }
+    // }
 }
 
 std::string i2s(int a)
