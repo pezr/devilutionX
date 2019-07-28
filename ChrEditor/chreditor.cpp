@@ -21,7 +21,7 @@
 
 const char* fontPath = "Anonymous Pro.ttf";
 
-void SVV_PlrStringXY(int x, int y, int width, const std::string& str, char color);
+void ChrE_PlrStringXY(int x, int y, int width, const std::string& str, char color);
 std::string i2s(int a);
 
 const int TTEXTS = 42;
@@ -55,166 +55,165 @@ using namespace dvl;
 void TxtDrawChr()
 {
     char col = COL_WHITE;
-    char chrstr[64];
     int pc, mindam, maxdam, x, y, w;
 
-    std::string str = "";
+    std::string chstr = "";
 
-    x = 3, y = 1, w = 14; str = plr[myplr]._pName; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
-    x = 22; y = 1; w = 14; str = ClassStrTbl[plr[myplr]._pClass]; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
-
-
-    x = 5; y = 3; w = 5; str = "Level"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
-    x += 6; y = 3; w = 6; str = i2s(plr[myplr]._pLevel); col = COL_GREY;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 3, y = 1, w = 14; chstr = plr[myplr]._pName; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
+    x = 22; y = 1; w = 14; chstr = ClassStrTbl[plr[myplr]._pClass]; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
 
-    x = 22; y = 3; w = 10; str = "Experience"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
-    x += 11; y = 3; w = 9; str = i2s(plr[myplr]._pExperience); col = COL_GREY;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 5; y = 3; w = 5; chstr = "Level"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
+    x += 6; y = 3; w = 6; chstr = i2s(plr[myplr]._pLevel); col = COL_GREY;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
-    x = 22; y = 5; w = 10; str = "Next level"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+
+    x = 22; y = 3; w = 10; chstr = "Experience"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
+    x += 11; y = 3; w = 9; chstr = i2s(plr[myplr]._pExperience); col = COL_GREY;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
+
+    x = 22; y = 5; w = 10; chstr = "Next level"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     if (plr[myplr]._pLevel == MAXCHARLEVEL - 1) {
-        str = "None";
+        chstr = "None";
         col = COL_GOLD;
     } else {
-        str = i2s(ExpLvlsTbl[plr[myplr]._pLevel]);
+        chstr = i2s(ExpLvlsTbl[plr[myplr]._pLevel]);
         col = COL_GREY;
     }
     x += 11; y = 5; w = 9;
-    SVV_PlrStringXY(x, y, w, str, col);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
-    x = 22; y = 8; w = 10; str = "Gold"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
-    x += 11; y = 8; w = 8; str = i2s(plr[myplr]._pGold); col = COL_GREY;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 22; y = 8; w = 10; chstr = "Gold"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
+    x += 11; y = 8; w = 8; chstr = i2s(plr[myplr]._pGold); col = COL_GREY;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
 
 
-    x = 10; y = 7; w = 4; str = "Base"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
-    x = 17; y = 7; w = 3; str = "Now"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 10; y = 7; w = 4; chstr = "Base"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
+    x = 17; y = 7; w = 3; chstr = "Now"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
-    x = 1; y = 9; w = 9; str = "Strength"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 1; y = 9; w = 9; chstr = "Strength"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = COL_GREY;
     if (MaxStats[plr[myplr]._pClass][ATTRIB_STR] == plr[myplr]._pBaseStr)
         col = COL_GOLD;
-    x += 10; y = 9; w = 3; str = i2s(plr[myplr]._pBaseStr);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 10; y = 9; w = 3; chstr = i2s(plr[myplr]._pBaseStr);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
     col = COL_GREY;
     if (plr[myplr]._pStrength > plr[myplr]._pBaseStr)
         col = COL_BLUE;
     if (plr[myplr]._pStrength < plr[myplr]._pBaseStr)
         col = COL_RED;
-    x += 6; y = 9; w = 3; str = i2s(plr[myplr]._pStrength);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 6; y = 9; w = 3; chstr = i2s(plr[myplr]._pStrength);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
 
-    x = 1; y = 11; w = 9; str = "Magic"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 1; y = 11; w = 9; chstr = "Magic"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = COL_GREY;
     if (MaxStats[plr[myplr]._pClass][ATTRIB_MAG] == plr[myplr]._pBaseMag)
         col = COL_GOLD;
-    x += 10; y = 11; w = 3; str = i2s(plr[myplr]._pBaseMag);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 10; y = 11; w = 3; chstr = i2s(plr[myplr]._pBaseMag);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
     col = COL_GREY;
     if (plr[myplr]._pMagic > plr[myplr]._pBaseMag)
         col = COL_BLUE;
     if (plr[myplr]._pMagic < plr[myplr]._pBaseMag)
         col = COL_RED;
-    x += 6; y = 11; w = 3; str = i2s(plr[myplr]._pMagic);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 6; y = 11; w = 3; chstr = i2s(plr[myplr]._pMagic);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
 
-    x = 1; y = 13; w = 9; str = "Dexterity"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 1; y = 13; w = 9; chstr = "Dexterity"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = COL_GREY;
     if (MaxStats[plr[myplr]._pClass][ATTRIB_DEX] == plr[myplr]._pBaseDex)
         col = COL_GOLD;
-    x += 10; y = 13; w = 3; str = i2s(plr[myplr]._pBaseDex);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 10; y = 13; w = 3; chstr = i2s(plr[myplr]._pBaseDex);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
     col = COL_GREY;
     if (plr[myplr]._pDexterity > plr[myplr]._pBaseDex)
         col = COL_BLUE;
     if (plr[myplr]._pDexterity < plr[myplr]._pBaseDex)
         col = COL_RED;
-    x += 6; y = 13; w = 3; str = i2s(plr[myplr]._pDexterity);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 6; y = 13; w = 3; chstr = i2s(plr[myplr]._pDexterity);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
 
-    x = 1; y = 15; w = 9; str = "Vitality"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 1; y = 15; w = 9; chstr = "Vitality"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = COL_GREY;
     if (MaxStats[plr[myplr]._pClass][ATTRIB_VIT] == plr[myplr]._pBaseVit)
         col = COL_GOLD;
-    x += 10; y = 15; w = 3; str = i2s(plr[myplr]._pBaseVit);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 10; y = 15; w = 3; chstr = i2s(plr[myplr]._pBaseVit);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
     col = COL_GREY;
     if (plr[myplr]._pVitality > plr[myplr]._pBaseVit)
         col = COL_BLUE;
     if (plr[myplr]._pVitality < plr[myplr]._pBaseVit)
         col = COL_RED;
-    x += 6; y = 15; w = 3; str = i2s(plr[myplr]._pVitality);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 6; y = 15; w = 3; chstr = i2s(plr[myplr]._pVitality);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
 
-    x = 1; y = 18; w = 9; str = "Life"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 1; y = 18; w = 9; chstr = "Life"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = plr[myplr]._pMaxHP <= plr[myplr]._pMaxHPBase ? COL_GREY : COL_BLUE;
-    x += 10; y = 18; w = 3; str = i2s(plr[myplr]._pMaxHP >> 6);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 10; y = 18; w = 3; chstr = i2s(plr[myplr]._pMaxHP >> 6);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     if (plr[myplr]._pHitPoints != plr[myplr]._pMaxHP)
         col = COL_RED;
-    x += 6; y = 18; w = 3; str = i2s(plr[myplr]._pHitPoints >> 6);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 6; y = 18; w = 3; chstr = i2s(plr[myplr]._pHitPoints >> 6);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
-    x = 1; y = 20; w = 9; str = "Mana"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 1; y = 20; w = 9; chstr = "Mana"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = plr[myplr]._pMaxMana <= plr[myplr]._pMaxManaBase ? COL_GREY : COL_BLUE;
-    x += 10; y = 20; w = 3; str = i2s(plr[myplr]._pMaxMana >> 6);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 10; y = 20; w = 3; chstr = i2s(plr[myplr]._pMaxMana >> 6);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     if (plr[myplr]._pMana != plr[myplr]._pMaxMana)
         col = COL_RED;
-    x += 6; y = 20; w = 3; str = i2s(plr[myplr]._pMana >> 6);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 6; y = 20; w = 3; chstr = i2s(plr[myplr]._pMana >> 6);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
 
 
-    x = 23; y = 10; w = 14; str = "Armor Class"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 23; y = 10; w = 14; chstr = "Armor Class"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = COL_GREY;
     if (plr[myplr]._pIBonusAC > 0)
         col = COL_BLUE;
     if (plr[myplr]._pIBonusAC < 0)
         col = COL_RED;
     x += 14; y = 10; w = 5;
-    str = i2s(plr[myplr]._pIBonusAC + plr[myplr]._pIAC + plr[myplr]._pDexterity / 5);
-    SVV_PlrStringXY(x, y, w, str, col);
+    chstr = i2s(plr[myplr]._pIBonusAC + plr[myplr]._pIAC + plr[myplr]._pDexterity / 5);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
-    x = 23; y = 12; w = 14; str = "To Hit"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 23; y = 12; w = 14; chstr = "To Hit"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = COL_GREY;
     if (plr[myplr]._pIBonusToHit > 0)
         col = COL_BLUE;
     if (plr[myplr]._pIBonusToHit < 0)
         col = COL_RED;
     x += 14; y = 12; w = 5;
-    str = i2s((plr[myplr]._pDexterity >> 1) + plr[myplr]._pIBonusToHit + 50) + "%";
-    SVV_PlrStringXY(x, y, w, str, col);
+    chstr = i2s((plr[myplr]._pDexterity >> 1) + plr[myplr]._pIBonusToHit + 50) + "%";
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
-    x = 23; y = 14; w = 14; str = "Damage"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 23; y = 14; w = 14; chstr = "Damage"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = COL_GREY;
     if (plr[myplr]._pIBonusDam > 0)
         col = COL_BLUE;
@@ -242,45 +241,45 @@ void TxtDrawChr()
     } else {
         maxdam += plr[myplr]._pDamageMod;
     }
-    x += 14; y = 14; w = 5; str = i2s(mindam) + "-" + i2s(maxdam);
-    SVV_PlrStringXY(x, y, w, str, col);
+    x += 14; y = 14; w = 5; chstr = i2s(mindam) + "-" + i2s(maxdam);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
 
-    x = 23; y = 16; w = 14; str = "Resist Magic"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 23; y = 16; w = 14; chstr = "Resist Magic"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = plr[myplr]._pMagResist == 0 ? COL_GREY : COL_BLUE;
     if (plr[myplr]._pMagResist < 75) {
-        str = i2s(plr[myplr]._pMagResist) + "%";
+        chstr = i2s(plr[myplr]._pMagResist) + "%";
     } else {
         col = COL_GOLD;
-        str = "MAX";
+        chstr = "MAX";
     }
     x += 14; y = 16; w = 5;
-    SVV_PlrStringXY(x, y, w, str, col);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
-    x = 23; y = 18; w = 14; str = "Resist Fire"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 23; y = 18; w = 14; chstr = "Resist Fire"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = plr[myplr]._pFireResist == 0 ? COL_GREY : COL_BLUE;
     if (plr[myplr]._pFireResist < 75) {
-        str = i2s(plr[myplr]._pFireResist) + "%";
+        chstr = i2s(plr[myplr]._pFireResist) + "%";
     } else {
         col = COL_GOLD;
-        str = "MAX";
+        chstr = "MAX";
     }
     x += 14; y = 18; w = 5;
-    SVV_PlrStringXY(x, y, w, str, col);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
-    x = 23; y = 20; w = 14; str = "Resist Lgtning"; col = COL_WHITE;
-    SVV_PlrStringXY(x, y, w, str, col);
+    x = 23; y = 20; w = 14; chstr = "Resist Lgtning"; col = COL_WHITE;
+    ChrE_PlrStringXY(x, y, w, chstr, col);
     col = plr[myplr]._pLghtResist == 0 ? COL_GREY : COL_BLUE;
     if (plr[myplr]._pLghtResist < 75) {
-        str = i2s(plr[myplr]._pLghtResist) + "%";
+        chstr = i2s(plr[myplr]._pLghtResist) + "%";
     } else {
         col = COL_GOLD;
-        str = "MAX";
+        chstr = "MAX";
     }
     x += 14; y = 20; w = 5;
-    SVV_PlrStringXY(x, y, w, str, col);
+    ChrE_PlrStringXY(x, y, w, chstr, col);
 
 }
 
@@ -304,6 +303,43 @@ void svviewer()
     }
 
     TxtDrawChr();
+
+    char col = COL_WHITE;
+    // ItemStruct item;
+    // std::string istr = "";
+    // int ii;
+    // for (int i = 0; i < NUM_INVLOC; i++) {
+        // item = plr[myplr].InvBody[i];
+        // if (item._itype != ITYPE_GOLD) {
+            // if (item._iIdentified)
+                // istr = item._iIName;
+            // else
+                // istr = item._iName;
+
+            // if (item._iMagical == ITEM_QUALITY_MAGIC)
+                // col = COL_BLUE;
+            // if (item._iMagical == ITEM_QUALITY_UNIQUE)
+                // col = COL_GOLD;
+            // std::cout << istr << std::endl;
+        // }
+    // }
+    // for (int i = 0; i < NUM_INV_GRID_ELEM; i++) {
+        // if (plr[myplr].InvGrid[i] > 0) {
+            // ii = plr[myplr].InvGrid[j] - 1;
+            // GetItemStr(plr[myplr].InvGrid[i] - 1 + INVITEM_INV_FIRST);
+            // col = infoclr;
+            // std::cout << infostr << std::endl;
+
+        // }
+    // }
+
+    for (int i = 0; i < MAXITEMS; i++) {
+        if (item[i]._itype != -1) {
+            GetItemStr(i);
+            col = infoclr;
+            std::cout << infostr << std::endl;
+        }
+    }
 }
 
 std::string i2s(int a)
@@ -315,7 +351,7 @@ std::string i2s(int a)
 
 /************** SDL ***************/
 
-void SVV_PlrStringXY(int x, int y, int w, const std::string& strv, char color)
+void ChrE_PlrStringXY(int x, int y, int w, const std::string& strv, char color)
 {
 
     if(ctext >= TTEXTS) return;
