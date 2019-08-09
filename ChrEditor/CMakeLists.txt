@@ -32,6 +32,7 @@ add_executable(chreditor
     ../SourceX/DiabloUI/selconn.cpp
     ../SourceX/DiabloUI/selgame.cpp
     ../SourceX/DiabloUI/selhero.cpp
+    ../SourceX/DiabloUI/selyesno.cpp
     ../SourceX/DiabloUI/title.cpp
     chreditor.cpp
     )
