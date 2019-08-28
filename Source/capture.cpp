@@ -12,11 +12,7 @@ void CaptureScreen()
 	hObject = CaptureFile(FileName);
 	if (hObject != INVALID_HANDLE_VALUE) {
 		DrawAndBlit();
-#ifdef __cplusplus
 		lpDDPalette->GetEntries(0, 0, 256, palette);
-#else
-		lpDDPalette->lpVtbl->GetEntries(lpDDPalette, 0, 0, 256, palette);
-#endif
 		RedPalette(palette);
 
 		lock_buf(2);
@@ -34,30 +30,26 @@ void CaptureScreen()
 			DeleteFile(FileName);
 
 		Sleep(300);
-#ifdef __cplusplus
 		lpDDPalette->SetEntries(0, 0, 256, palette);
-#else
-		lpDDPalette->lpVtbl->SetEntries(lpDDPalette, 0, 0, 256, palette);
-#endif
 	}
 }
 
 BOOL CaptureHdr(HANDLE hFile, short width, short height)
 {
 	DWORD lpNumBytes;
-	PCXHeader Buffer;
+	PCXHEADER Buffer;
 
 	memset(&Buffer, 0, sizeof(Buffer));
-	Buffer.manufacturer = 10;
-	Buffer.version = 5;
-	Buffer.encoding = 1;
-	Buffer.bitsPerPixel = 8;
-	Buffer.xmax = width - 1;
-	Buffer.ymax = height - 1;
-	Buffer.horzRes = width;
-	Buffer.vertRes = height;
-	Buffer.numColorPlanes = 1;
-	Buffer.bytesPerScanLine = width;
+	Buffer.Manufacturer = 10;
+	Buffer.Version = 5;
+	Buffer.Encoding = 1;
+	Buffer.BitsPerPixel = 8;
+	Buffer.Xmax = width - 1;
+	Buffer.Ymax = height - 1;
+	Buffer.HDpi = width;
+	Buffer.VDpi = height;
+	Buffer.NPlanes = 1;
+	Buffer.BytesPerLine = width;
 
 	return WriteFile(hFile, &Buffer, sizeof(Buffer), &lpNumBytes, NULL) && lpNumBytes == sizeof(Buffer);
 }
@@ -162,11 +154,7 @@ void RedPalette(PALETTEENTRY *pal)
 		red[i].peFlags = 0;
 	}
 
-#ifdef __cplusplus
 	lpDDPalette->SetEntries(0, 0, 256, red);
-#else
-	lpDDPalette->lpVtbl->SetEntries(lpDDPalette, 0, 0, 256, red);
-#endif
 }
 
 DEVILUTION_END_NAMESPACE

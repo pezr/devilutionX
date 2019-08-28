@@ -89,7 +89,7 @@ void control_draw_info_str();
 void control_print_info_str(int y, char *str, BOOL center, int lines);
 void PrintGameStr(int x, int y, char *str, int color);
 void DrawChr();
-void ADD_PlrStringXY(int x, int y, int width, char *pszStr, char col);
+#define ADD_PlrStringXY(x, y, width, pszStr, col) MY_PlrStringXY(x, y, width, pszStr, col, 1)
 void MY_PlrStringXY(int x, int y, int width, char *pszStr, char col, int base);
 void CheckLvlBtn();
 void ReleaseLvlBtn();
@@ -132,7 +132,7 @@ extern char SpellITbl[MAX_SPELLS];
 extern int PanBtnPos[8][5];
 extern char *PanBtnHotKey[8];
 extern char *PanBtnStr[8];
-extern RECT32 attribute_inc_rects[4];
+extern RECT32 ChrBtnsRect[4];
 extern int SpellPages[6][7];
 
 #endif /* __CONTROL_H__ */

@@ -129,6 +129,7 @@ void DRLG_Init_Globals()
 	memset(dLight, c, sizeof(dLight));
 }
 
+#ifndef SPAWN
 void LoadL1Dungeon(char *sFileName, int vx, int vy)
 {
 	int i, j, rw, rh;
@@ -177,6 +178,7 @@ void LoadL1Dungeon(char *sFileName, int vx, int vy)
 	SetMapObjects(pLevelMap, 0, 0);
 	mem_free_dbg(pLevelMap);
 }
+#endif
 
 void DRLG_L1Floor()
 {
@@ -204,32 +206,10 @@ void DRLG_L1Pass3()
 
 	lv = 22 - 1;
 
-#ifdef USE_ASM
-	__asm {
-		mov		esi, pMegaTiles
-		mov		eax, lv
-		shl		eax, 3
-		add		esi, eax
-		xor		eax, eax
-		lodsw
-		inc		eax
-		mov		v1, eax
-		lodsw
-		inc		eax
-		mov		v2, eax
-		lodsw
-		inc		eax
-		mov		v3, eax
-		lodsw
-		inc		eax
-		mov		v4, eax
-	}
-#else
 	v1 = *((WORD *)&pMegaTiles[lv * 8]) + 1;
 	v2 = *((WORD *)&pMegaTiles[lv * 8] + 1) + 1;
 	v3 = *((WORD *)&pMegaTiles[lv * 8] + 2) + 1;
 	v4 = *((WORD *)&pMegaTiles[lv * 8] + 3) + 1;
-#endif
 
 	for (j = 0; j < MAXDUNY; j += 2)
 	{
@@ -247,32 +227,10 @@ void DRLG_L1Pass3()
 		for (i = 0; i < DMAXX; i++) {
 			lv = dungeon[i][j] - 1;
 			/// ASSERT: assert(lv >= 0);
-#ifdef USE_ASM
-			__asm {
-				mov		esi, pMegaTiles
-				mov		eax, lv
-				shl		eax, 3
-				add		esi, eax
-				xor		eax, eax
-				lodsw
-				inc		eax
-				mov		v1, eax
-				lodsw
-				inc		eax
-				mov		v2, eax
-				lodsw
-				inc		eax
-				mov		v3, eax
-				lodsw
-				inc		eax
-				mov		v4, eax
-			}
-#else
 			v1 = *((WORD *)&pMegaTiles[lv * 8]) + 1;
 			v2 = *((WORD *)&pMegaTiles[lv * 8] + 1) + 1;
 			v3 = *((WORD *)&pMegaTiles[lv * 8] + 2) + 1;
 			v4 = *((WORD *)&pMegaTiles[lv * 8] + 3) + 1;
-#endif
 			dPiece[xx][yy] = v1;
 			dPiece[xx + 1][yy] = v2;
 			dPiece[xx][yy + 1] = v3;
@@ -325,6 +283,7 @@ void DRLG_InitL1Vals()
 	}
 }
 
+#ifndef SPAWN
 void LoadPreL1Dungeon(char *sFileName, int vx, int vy)
 {
 	int i, j, rw, rh;
@@ -372,6 +331,7 @@ void LoadPreL1Dungeon(char *sFileName, int vx, int vy)
 
 	mem_free_dbg(pLevelMap);
 }
+#endif
 
 void CreateL5Dungeon(DWORD rseed, int entry)
 {

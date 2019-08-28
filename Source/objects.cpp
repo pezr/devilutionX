@@ -839,6 +839,7 @@ void InitObjects()
 	}
 }
 
+#ifndef SPAWN
 void SetMapObjects(BYTE *pMap, int startx, int starty)
 {
 	int rw, rh;
@@ -898,6 +899,7 @@ void SetMapObjects(BYTE *pMap, int startx, int starty)
 	}
 	InitObjFlag = FALSE;
 }
+#endif
 
 void DeleteObject_(int oi, int i)
 {
@@ -1707,10 +1709,12 @@ void Obj_BCrossDamage(int i)
 	} else {
 		if (plr[myplr]._pClass == PC_WARRIOR) {
 			PlaySfxLoc(PS_WARR68, plr[myplr].WorldX, plr[myplr].WorldY);
+#ifndef SPAWN
 		} else if (plr[myplr]._pClass == PC_ROGUE) {
 			PlaySfxLoc(PS_ROGUE68, plr[myplr].WorldX, plr[myplr].WorldY);
 		} else if (plr[myplr]._pClass == PC_SORCERER) {
 			PlaySfxLoc(PS_MAGE68, plr[myplr].WorldX, plr[myplr].WorldY);
+#endif
 		}
 	}
 	drawhpflag = TRUE;
@@ -1834,25 +1838,8 @@ void objects_set_door_piece(int x, int y)
 
 	pn = dPiece[x][y] - 1;
 
-#ifdef USE_ASM
-	__asm {
-	mov		esi, pLevelPieces
-	xor		eax, eax
-	mov		ax, word ptr pn
-	mov		ebx, 20
-	mul		ebx
-	add		esi, eax
-	add		esi, 16
-	xor		eax, eax
-	lodsw
-	mov		word ptr v1, ax
-	lodsw
-	mov		word ptr v2, ax
-	}
-#else
 	v1 = *((WORD *)pLevelPieces + 10 * pn + 8);
 	v2 = *((WORD *)pLevelPieces + 10 * pn + 9);
-#endif
 	dpiece_defs_map_1[IsometricCoord(x, y)].mt[0] = v1;
 	dpiece_defs_map_1[IsometricCoord(x, y)].mt[1] = v2;
 }
@@ -1862,34 +1849,10 @@ void ObjSetMini(int x, int y, int v)
 	int xx, yy;
 	long v1, v2, v3, v4;
 
-#ifdef USE_ASM
-	__asm {
-		mov		esi, pMegaTiles
-		xor		eax, eax
-		mov		ax, word ptr v
-		dec		eax
-		shl		eax, 3
-		add		esi, eax
-		xor		eax, eax
-		lodsw
-		inc		eax
-		mov		v1, eax
-		lodsw
-		inc		eax
-		mov		v2, eax
-		lodsw
-		inc		eax
-		mov		v3, eax
-		lodsw
-		inc		eax
-		mov		v4, eax
-	}
-#else
 	v1 = *((WORD *)&pMegaTiles[((WORD)v - 1) * 8]) + 1;
 	v2 = *((WORD *)&pMegaTiles[((WORD)v - 1) * 8] + 1) + 1;
 	v3 = *((WORD *)&pMegaTiles[((WORD)v - 1) * 8] + 2) + 1;
 	v4 = *((WORD *)&pMegaTiles[((WORD)v - 1) * 8] + 3) + 1;
-#endif
 
 	xx = 2 * x + 16;
 	yy = 2 * y + 16;
@@ -2623,10 +2586,12 @@ void OperateMushPatch(int pnum, int i)
 		if (!deltaload && pnum == myplr) {
 			if (plr[myplr]._pClass == PC_WARRIOR) {
 				PlaySFX(PS_WARR13);
+#ifndef SPAWN
 			} else if (plr[myplr]._pClass == PC_ROGUE) {
 				PlaySFX(PS_ROGUE13);
 			} else if (plr[myplr]._pClass == PC_SORCERER) {
 				PlaySFX(PS_MAGE13);
+#endif
 			}
 		}
 	} else {
@@ -2652,10 +2617,12 @@ void OperateInnSignChest(int pnum, int i)
 		if (!deltaload && pnum == myplr) {
 			if (plr[myplr]._pClass == PC_WARRIOR) {
 				PlaySFX(PS_WARR24);
+#ifndef SPAWN
 			} else if (plr[myplr]._pClass == PC_ROGUE) {
 				PlaySFX(PS_ROGUE24);
 			} else if (plr[myplr]._pClass == PC_SORCERER) {
 				PlaySFX(PS_MAGE24);
+#endif
 			}
 		}
 	} else {
@@ -2679,13 +2646,19 @@ void OperateSlainHero(int pnum, int i, BOOL sendmsg)
 		if (!deltaload) {
 			if (plr[pnum]._pClass == PC_WARRIOR) {
 				CreateMagicArmor(object[i]._ox, object[i]._oy, 9, ICURS_BREAST_PLATE, 0, 1);
+#ifndef SPAWN
 				PlaySfxLoc(PS_WARR9, plr[myplr].WorldX, plr[myplr].WorldY);
+#endif
 			} else if (plr[pnum]._pClass == PC_ROGUE) {
 				CreateMagicWeapon(object[i]._ox, object[i]._oy, 3, ICURS_LONG_WAR_BOW, 0, 1);
+#ifndef SPAWN
 				PlaySfxLoc(PS_ROGUE9, plr[myplr].WorldX, plr[myplr].WorldY);
+#endif
 			} else if (plr[pnum]._pClass == PC_SORCERER) {
 				CreateSpellBook(object[i]._ox, object[i]._oy, 3, 0, 1);
+#ifndef SPAWN
 				PlaySfxLoc(PS_MAGE9, plr[myplr].WorldX, plr[myplr].WorldY);
+#endif
 			}
 			if (pnum == myplr)
 				NetSendCmdParam1(FALSE, CMD_OPERATEOBJ, i);
